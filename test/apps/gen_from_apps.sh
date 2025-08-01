@@ -1,0 +1,11 @@
+python gen_from_apps.py \
+ --lang python \                                                              # Programming language for code generation
+ --model_name_or_path "Qwen/Qwen2.5-Coder-7B-Instruct" \                     # Model name/path for code generation
+ --n 10 \                                                                     # Number of completions to generate for each prompt
+ --t 0.2 \                                                                    # Temperature for sampling (lower = more deterministic)
+ --col_name question \                                                        # Column name in the dataset containing the prompt
+ --fout your_output_file.jsonl \                                              # Output file path for generated code
+ --start-id 0 \                                                               # Starting index of the dataset to process
+ --end-id -1 \                                                                # Ending index of the dataset to process (-1 for end of dataset)
+ --port-clients 8002:2 \                                                      # Port:client_count pairs for parallel processing
+ --ip localhost                                                               # IP address of the server

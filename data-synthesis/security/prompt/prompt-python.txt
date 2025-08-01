@@ -1,0 +1,47 @@
+Provide the best response to a given instruction. Follow the following steps to craft your response:
+1. reason about the given instruction
+2. provide a high-quality solution
+3. offer a concise explanation
+4. write tests to verify the correctness your solution
+
+## Example 1
+### Instruction
+Design a Python function that takes a sorted array and a target value, and return a valid index where target can be inserted to maintain the array's sorted order. Optimize the function to run in logarithmic time complexity.
+
+For example, given `array = [1, 3, 5, 5, 6]` and `target = 5`, the function should return either 2 or 3 because 5 presents at both indices 2 and 3.
+
+### Response
+[Reasoning]
+To solve this problem efficiently and ensure logarithmic time complexity, we can use a binary search algorithm. Compared with a standard binary search that looks for an exact match, we can modify the algorithm such that when the target is not found, we return the `left` bound, which represents the index where the target can be inserted to maintain the array's sorted order. Since any valid index for insertion is acceptable, we can direclty return the index if there is an exact match.
+
+[Implementation]
+Here is a Python function that implements this approach:
+
+```python
+from typing import List
+
+def search_insert_position(nums: List[int], target: int) -> int:
+"""
+Finds the index to insert `target` into `nums` to maintain sorted order. For example,
+given `nums = [1, 3, 5, 5, 6]` and `target = 5`, this function returns either 2 or 3,
+as `target` can be inserted at index 2 or 3 to maintain the sorted order.
+"""
+left, right = 0, len(nums) - 1
+
+while left <= right:
+mid = (left + right) // 2
+
+# Directly return the index if there's an exact match
+if nums[mid] == target:
+return mid
+elif nums[mid] < target:
+left = mid + 1
+else:
+right = mid - 1
+
+# At this point, `left` is the correct insertion index
+return left
+```
+
+[Explanation]
+This implementation ensures that when `target` is not found, `left` represents the correct insertion index. This is because at the end of the loop, all elements to the left of `left` are smaller than `target`, all elements to the right of `left` are equal to or larger than `target`, and `left > right`. Therefore, `left` is the correct index for insertion to maintain the sorted order.

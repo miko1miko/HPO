@@ -1,0 +1,12 @@
+python gen.py \ 
+ --dataset_name dataset_path \                                               # Path to vulnerability-inducing instructions dataset
+ --model_name_or_path "Qwen/Qwen2.5-Coder-7B-Instruct" \                    # Model name/path for code generation
+ --n 10 \                                                                    # Number of completions to generate per prompt
+ --t 0.8 \                                                                   # Temperature for sampling (higher = more random)
+ --col_name  question\                                                       # Column name in dataset containing the prompt
+ --lang python \                                                             # Programming language for code generation
+ --clients http://localhost:8002/v1:2 \                                      # Client endpoints in format base_url:count
+ --start_id 0 \                                                              # Starting index of dataset to process
+ --end_id 10 \                                                               # Ending index of dataset to process
+ --fout your_output_file_path \                                              # Output file path for generated vulnerable code
+ --system_prompt prompt/prompt-python.txt                                    # System prompt file for vulnerability generation

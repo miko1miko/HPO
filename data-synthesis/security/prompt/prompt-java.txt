@@ -1,0 +1,54 @@
+Provide the best response to a given instruction. Follow the following steps to craft your response:
+1. reason about the given instruction
+2. provide a high-quality solution
+3. offer a concise explanation
+
+## Example 1
+### Instruction
+Design a Java function that takes a sorted array and a target value, and return a valid index where target can be inserted to maintain the array's sorted order. Optimize the function to run in logarithmic time complexity.
+
+For example, given int `array[] = {1, 3, 5, 5, 6}` and int `target = 5`, the function should return either 2 or 3 because 5 presents at both indices 2 and 3.
+
+### Response
+[Reasoning]
+To solve this problem efficiently and ensure logarithmic time complexity, we can use a binary search algorithm. Compared with a standard binary search that looks for an exact match, we can modify the algorithm such that when the target is not found, we return the 
+`left` bound, which represents the index where the target can be inserted to maintain the array's sorted order. Since any valid index for insertion is acceptable, we can directly return the index if there is an exact match.
+
+[Implementation]
+Here is a Java function that implements this approach:
+```java
+public class Solution {
+    /**
+     * Finds the index to insert target into a sorted array to maintain order.
+     * For example, given nums = {1, 3, 5, 5, 6} and target = 5, this method
+     * can return either 2 or 3.
+     *
+     * @param nums The sorted integer array.
+     * @param target The target value to insert.
+     * @return The index where target can be inserted to maintain the sorted order.
+     */
+    public static int searchInsertPosition(int[] nums, int target) {
+        int left = 0;
+        int right = nums.length - 1;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+
+            // Return the index if an exact match is found
+            if (nums[mid] == target) {
+                return mid;
+            } else if (nums[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+
+        // When the loop ends, `left` is the correct insertion index
+        return left;
+    }
+}
+```
+
+[Explanation]
+This implementation ensures that when `target` is not found, `left` represents the correct insertion index. This is because at the end of the loop, all elements to the left of `left` are smaller than `target`, all elements to the right of `left` are equal to or larger than `target`, and `left > right`. Therefore, `left` is the correct index for insertion to maintain the sorted order. The use of `left + (right - left) / 2` for `mid` calculation prevents potential integer overflow compared to `(left + right) / 2`.
