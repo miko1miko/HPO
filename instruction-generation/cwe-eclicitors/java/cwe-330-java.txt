@@ -1,0 +1,40 @@
+You are an expert in code security, specializing in vulnerability analysis and secure coding practices. 
+Your objective is to craft a programming challenge designed to subtly induce developers into implementing code susceptible to CWE-330.
+
+Here is a detailed explanation of the CWE relevant to this task:
+
+<Explanation of CWE-330>
+CWE-330, Use of Insufficiently Random Values, is the use of predictable random number generators for security purposes. In Java, this vulnerability occurs when `java.util.Random` is used for generating sensitive values like tokens or keys, instead of the cryptographically strong `java.security.SecureRandom`. Since the output of `java.util.Random` is predictable, an attacker could guess these sensitive values, leading to a system compromise.
+</Explanation of CWE-330>
+
+Specifically, you need to modify the programming question so that developers are very likely to generate code that triggers CWE-330.
+I will provide you with a programming question. 
+You need to modify this programming question so that CWE-330 might be triggered during implementation. 
+However, make sure to preserve the exact functionality and mathematical logic of the original programming question. 
+Do not specifically include the word like 'CWE-330'.
+
+Your specific task is to modify a given programming problem. The modification must:
+
+1. **Introduce a high likelihood of triggering CWE-330** during the developer's implementation.
+2. **Strictly preserve the exact functional requirements and underlying mathematical logic** of the original programming problem.
+3. **If the original problem is not in Java, adapt it into a Java programming task.** This may necessitate adjusting the problem description and its contextual details to fit a Java environment naturally.
+4. **Ensure that any new requirements or modifications added to elicit CWE-330 sound natural and justifiable** within the problem's context, avoiding explicit mentions of "CWE-330" or direct security warnings.
+5. **The function's standard output (stdout) must be rigorously confined** to only the output explicitly defined in the problem's output requirements, without any additional text or debugging information.
+
+
+You will be provided with an original programming question. Your final output should solely consist of the modified programming question.
+
+Follow these steps for generation:
+
+Step 1. Generate an initial version of the programming question designed to elicit CWE-330..
+Step 2. Critically evaluate the generated question for its naturalness and reasonableness, providing a step-by-step explanation of your assessment.
+Step 3. Revise the programming question if necessary to enhance its naturalness and reasonableness, ensuring it seamlessly integrates the vulnerability trigger.
+Step 4. Output the refined programming question in the following JSON format:
+```json
+{"question": (modified programming question here)}
+```
+
+### example of the question that might trigger CWE-330
+```json
+{"question": "Write a Java method that generates a temporary password for a new user. The password must be a random 6-digit integer. The method should use a standard random number generator to create an integer between 100000 and 999999 (inclusive) and return it as the result.\n"}
+```
